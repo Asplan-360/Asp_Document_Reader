@@ -12,7 +12,7 @@ public class MenuItemService : IMenuItemService
         _context = context;
     }
 
-    public async Task<List<MenuItem>> GetMenuItems()
+    public async Task<List<MenuItem>?> GetMenuItems()
     {
         var lista = await _context.MenuItems.ToListAsync();
         return lista;       

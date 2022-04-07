@@ -17,11 +17,15 @@ public class MenuItemService : IMenuItemService
 
     public async Task<List<MenuItem>?> GetMenuItems()
     {
-        var result = 
-            await _http.GetFromJsonAsync<List<MenuItem>>("api/MenuItem");
-        return result;  
+        var result =
+            await _http.GetFromJsonAsync<List<MenuItem>>("menuitem");
+
+
+        return result;
+
+
 
     }
-       
-   
+
+
 }

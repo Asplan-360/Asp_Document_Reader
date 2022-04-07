@@ -4,7 +4,7 @@
 
 namespace Asp_Document_Reader.Server.Controllers;
 
-[Route("api/[controller]")]
+[Route("[controller]")]
 [ApiController]
 public class MenuItemController : ControllerBase
 {

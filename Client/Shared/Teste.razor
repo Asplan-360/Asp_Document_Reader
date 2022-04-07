@@ -1,4 +1,5 @@
-﻿@inject IMenuItemService MenuItemService
+﻿@page "/menuitem"  
+@inject IMenuItemService MenuItemService
 
 <h1> Teste Isolation CSS</h1>
 
@@ -10,27 +11,26 @@ else
 {
 
 
-    <ul>
-        @foreach (var item in MenuItemService.MenuItems.GroupBy(x => x.RotinaId))
-        {
-
-
-            <li>
-                @item.OrderBy(x => x.RotinaId)
-            </li>
-        }
-
-    </ul>
-}
-
-@code {
-  
-
-    protected override async Task OnInitializedAsync()
+    @foreach (var item in MenuItemService.MenuItems.GroupBy(x => x.DescMenu))
     {
-        await MenuItemService.GetMenuItems();
+        <ul>
+
+
+
+            @foreach (var subitem in item.Where(x => x.MenuId == item.First().MenuId))
+            {
+                <li>
+                    @subitem.Titulo
+                </li>
+            }
+        </ul>
     }
+
+
 }
+
+
+
 
 
 
