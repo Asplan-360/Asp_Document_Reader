@@ -4,8 +4,5 @@ public interface IMenuItemService
 {
     List<MenuItem> MenuItems { get; set; }
 
-    Task GetMenuItems();
-
-    MenuItem CreateNewMenuItem();
-
+    Task<List<MenuItem>?> GetMenuItems();
 }

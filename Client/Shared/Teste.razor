@@ -1,0 +1,37 @@
+﻿@inject IMenuItemService MenuItemService
+
+<h1> Teste Isolation CSS</h1>
+
+@if (MenuItemService.MenuItems == null || MenuItemService.MenuItems.Count == 0)
+{
+    <span>Falha ao trazer a lista</span>
+}
+else
+{
+
+
+    <ul>
+        @foreach (var item in MenuItemService.MenuItems.GroupBy(x => x.RotinaId))
+        {
+
+
+            <li>
+                @item.OrderBy(x => x.RotinaId)
+            </li>
+        }
+
+    </ul>
+}
+
+@code {
+  
+
+    protected override async Task OnInitializedAsync()
+    {
+        await MenuItemService.GetMenuItems();
+    }
+}
+
+
+
+

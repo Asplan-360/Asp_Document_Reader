@@ -12,18 +12,13 @@ public class MenuItemService : IMenuItemService
         _context = context;
     }
 
-   
-    public async Task<ServiceResponse<List<MenuItem>>> GetMenuItems()
+    public async Task<List<MenuItem>> GetMenuItems()
     {
-        var menuItems = await _context.MenuItems.ToListAsync();
+        var lista = await _context.MenuItems.ToListAsync();
+        return lista;       
 
-        return new ServiceResponse<List<MenuItem>>
-        {
-            Data = menuItems
-        };
+
     }
-
-
-
 }
+
 

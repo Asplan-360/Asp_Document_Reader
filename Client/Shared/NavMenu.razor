@@ -19,14 +19,14 @@
             </NavLink>
         </div>
 
-       @foreach (var item in MenuItemService.MenuItems.GroupBy(x => x.DescMenu))
-        {
+     
+        
             <div class="nav-item px-3">
                 <NavLink class="nav-link" href="#">
-                    
+                    Teste
                 </NavLink>
             </div>
-        }
+        
 
     </nav>
 </div>
@@ -41,7 +41,7 @@
         collapseNavMenu = !collapseNavMenu;
     }
 
-    protected override async Task OnInitializedAsync() => await MenuItemService.GetMenuItems();
+   
 
 
 

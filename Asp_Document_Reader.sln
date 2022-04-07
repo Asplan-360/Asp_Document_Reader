@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asp_Document_Reader.Server", "Server\Asp_Document_Reader.Server.csproj", "{F5F55D9F-E060-4D67-8D2E-A92645761F90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asp_Document_Reader.Server", "Server\Asp_Document_Reader.Server.csproj", "{F5F55D9F-E060-4D67-8D2E-A92645761F90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asp_Document_Reader.Client", "Client\Asp_Document_Reader.Client.csproj", "{1E8F6637-3F88-4825-88A1-30CC8BACDD61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asp_Document_Reader.Client", "Client\Asp_Document_Reader.Client.csproj", "{1E8F6637-3F88-4825-88A1-30CC8BACDD61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asp_Document_Reader.Shared", "Shared\Asp_Document_Reader.Shared.csproj", "{4D090709-CC55-4CEE-8C58-5CFE55B6BB14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asp_Document_Reader.Shared", "Shared\Asp_Document_Reader.Shared.csproj", "{4D090709-CC55-4CEE-8C58-5CFE55B6BB14}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
