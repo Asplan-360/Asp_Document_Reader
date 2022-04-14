@@ -18,6 +18,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IMenuItemService, MenuItemService>();
+builder.Services.AddScoped<AppDbContext>();
 
 var app = builder.Build();
 
@@ -40,8 +41,20 @@ app.UseHttpsRedirection();
 
 app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
-
 app.UseRouting();
+app.UseEndpoints(endpoints =>
+{
+
+    endpoints.MapControllerRoute(
+     name: "default",
+     pattern: "{controller=MenuItem}/{action=List}/{id?}");
+
+    //endpoints.MapControllerRoute(
+    //name: "menu",
+    //pattern: "{controller=Home}/{action=Index}/{id?}");
+
+
+});
 
 
 app.MapRazorPages();

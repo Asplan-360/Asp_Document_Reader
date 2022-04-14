@@ -1,6 +1,4 @@
-﻿
-
-using System.Net.Http.Json;
+﻿using System.Net.Http.Json;
 
 namespace Asp_Document_Reader.Client.Services;
 
@@ -17,8 +15,7 @@ public class MenuItemService : IMenuItemService
 
     public async Task<List<MenuItem>?> GetMenuItems()
     {
-        var result =
-            await _http.GetFromJsonAsync<List<MenuItem>>("menuitem");
+        var result = await _http.GetFromJsonAsync<List<MenuItem>>("api/menuitem");
 
 
         return result;

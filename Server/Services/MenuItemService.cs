@@ -15,7 +15,7 @@ public class MenuItemService : IMenuItemService
     public async Task<List<MenuItem>?> GetMenuItems()
     {
         var lista = await _context.MenuItems.ToListAsync();
-        return lista;       
+        return lista;
 
 
     }

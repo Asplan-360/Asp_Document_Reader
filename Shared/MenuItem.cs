@@ -10,32 +10,32 @@ public class MenuItem
     [Key]
     [Column("GER_Rotina_Id")]
     [Display(Name = "Rotina ID")]
-    public int RotinaId { get; set; }
+    public int? RotinaId { get; set; }
 
     [Column("GER_Menu_ID")]
     [Display(Name = "Menu ID")]
-    public int MenuId { get; set; }
+    public int? MenuId { get; set; }
 
     [Column("DescMenu")]
     [Display(Name = "Tipo")]
-    public string DescMenu { get; set; }
+    public string? DescMenu { get; set; }
 
-    [Required]
+    
     [Column("titulo")]
     [Display(Name = "Titulo")]
-    public string Titulo { get; set; }
+    public string? Titulo { get; set; }
 
     [Column("OrdemMenu")]
     [Display(Name = "OrdemMenu")]
-    public int OrdemMenu { get; set; }
+    public int? OrdemMenu { get; set; }
 
     [Column("DescRotina")]
     [Display(Name = "Rotina")]
-    public string Rotina { get; set; }
+    public string? Rotina { get; set; }
 
     [Column("OrdemRotina")]
     [Display(Name = "Ordem Rotina")]
-    public int OrdemRotina { get; set; }
+    public int? OrdemRotina { get; set; }
 
     [Column("acesspadm")]
     [Display(Name = "Tipo de Acesso")]
@@ -43,24 +43,24 @@ public class MenuItem
 
     [Column("icone")]
     [Display(Name = "Icone")]
-    public string Icone { get; set; }
+    public string? Icone { get; set; }
 
     [Column("janela")]
     [Display(Name = "Janela")]
-    public string Janela { get; set; }
+    public string? Janela { get; set; }
 
-    [Required]
+    
     [Column("descricao")]
     [Display(Name = "Descrição")]
-    public string Descricao { get; set; }
+    public string? Descricao { get; set; }
 
     [Column("rota")]
     [Display(Name = "Rota")]
-    public string Rota { get; set; }
+    public string? Rota { get; set; }
 
     [Column("paramauxiliar")]
     [Display(Name = "Parametro Auxiliar")]
-    public string Auxiliar { get; set; }
+    public string? Auxiliar { get; set; }
 
     [Column("Action")]
     [NotMapped]

@@ -2,7 +2,7 @@
 
 public interface IMenuItemService
 {
-    List<MenuItem> MenuItems { get; set; }
+    public List<MenuItem> MenuItems { get;}
 
-    Task<List<MenuItem>?> GetMenuItems();
+   public Task<List<MenuItem>?> GetMenuItems();
 }
