@@ -1,4 +1,4 @@
-﻿@page "/api/menuitem"  
+﻿
 @inject IMenuItemService MenuItemService
 
 <h1> Teste Isolation CSS</h1>
@@ -14,8 +14,7 @@ else
      @foreach (var item in  MenuItemService.MenuItems.GroupBy(x => x.DescMenu))
     {
         <ul>
-
-
+            @listas.
 
             @foreach (var subitem in  item.Where(x => x.MenuId == item.First().MenuId))
             {
