@@ -28,7 +28,7 @@ public class MenuItemService : IMenuItemService
 
     public async Task GetMenuItems()
     {
-        var response = await _http.GetFromJsonAsync<ServiceResponse<List<MenuItem>>> ("/Menu");
+        var response = await _http.GetFromJsonAsync<ServiceResponse<List<MenuItem>>> ("/menuitem");
       
     }
 }
