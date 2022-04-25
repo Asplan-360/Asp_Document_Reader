@@ -1,9 +1,9 @@
 ﻿
-@inject IMenuItemService MenuItemService
+@inject HttpClient _http
 
 <h1> Teste Isolation CSS</h1>
 
- @if (MenuItemService.MenuItems == null || MenuItemService.MenuItems.Count == 0)
+ @if (MenuItems == null || MenuItems.Count == 0)
 {
     <span>Falha ao trazer a lista</span>
 }
@@ -11,10 +11,10 @@ else
 {
 
 
-     @foreach (var item in  MenuItemService.MenuItems.GroupBy(x => x.DescMenu))
+     @foreach (var item in  MenuItems.GroupBy(x => x.DescMenu))
     {
         <ul>
-            @listas.
+            
 
             @foreach (var subitem in  item.Where(x => x.MenuId == item.First().MenuId))
             {
@@ -29,7 +29,30 @@ else
 
 
 
+@code{
 
+    public List<MenuItem> MenuItems { get; set; } = new List<MenuItem>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        
+        MenuItems = await GetMenuItems();
+    }
+
+
+    public async Task<List<MenuItem>> GetMenuItems()
+    {
+        var result = await _http.GetFromJsonAsync<List<MenuItem>>("api/menuitem");
+
+
+        return result;
+
+
+
+
+
+    }
+}
 
 
 

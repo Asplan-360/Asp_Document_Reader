@@ -1,6 +1,52 @@
-﻿@inject IMenuItemService MenuItemService
+﻿@inject HttpClient _http
 
 
+
+<nav class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Asp_Document_Reader</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+
+
+
+
+           @foreach (var item in MenuItems.GroupBy(x => x.DescMenu))
+            {
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link dropdown-toggle" href="#" id=@item.First().Titulo role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        @item.First().DescMenu
+                    </a>
+                    @foreach (var subitem in item.Where(x => x.MenuId == item.First().MenuId))
+                    {
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item " href="#">@subitem.Titulo</a>
+
+                        </div>
+                    }
+                </li>
+            }
+
+        </ul>
+
+    </div>
+</nav>
+
+
+
+
+
+
+
+
+@*
 
 <div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
@@ -9,28 +55,60 @@
             <span class="navbar-toggler-icon"></span>
         </button>
     </div>
-</div>
+</div>*@
 
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+@*<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
     <nav class="flex-column">
+
+
+
+        @foreach (var item in MenuItems.GroupBy(x => x.DescMenu))
+        {
+            <div class="nav">
+                <a class="nav-link" href="/ItemMenu/List">
+
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts-@item.First().MenuId" aria-expanded="false" aria-controls="collapseLayouts-@item.First().Menuid">
+
+                        @item.First().DescMenu
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        <div class="collapse" id="collapseLayouts-@item.First().MenuId" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                @foreach (var subitem in item.Where(x => x.MenuId == item.First().MenuId))
+                                {
+
+                                    <a class="nav-link" asp-controller="ItemMenu" asp-action="Roteamento" asp-route-rota="@subitem.Titulo">@subitem.Titulo</a>
+
+                                }
+                            </nav>
+
+                        </div>
+                    </a>
+                </a>
+
+            </div>
+        }
+
+
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
                 <span class="oi oi-home" aria-hidden="true"></span> Home
             </NavLink>
         </div>
 
-     
-        
-            <div class="nav-item px-3">
-                <NavLink class="nav-link" href="api/menuitem">
-                    Teste
 
-                </NavLink>
-            </div>
-        
+
+
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="api/menuitem">
+                Teste
+
+            </NavLink>
+        </div>
+
 
     </nav>
-</div>
+</div>*@
 
 @code {
     private bool collapseNavMenu = true;
@@ -41,8 +119,28 @@
     {
         collapseNavMenu = !collapseNavMenu;
     }
+    public List<MenuItem> MenuItems { get; set; } = new List<MenuItem>();
 
-   
+    protected override async Task OnInitializedAsync()
+    {
+
+        MenuItems = await GetMenuItems();
+    }
+
+
+    public async Task<List<MenuItem>> GetMenuItems()
+    {
+        var result = await _http.GetFromJsonAsync<List<MenuItem>>("api/menuitem");
+
+
+        return result;
+
+
+
+
+
+    }
+
 
 
 
