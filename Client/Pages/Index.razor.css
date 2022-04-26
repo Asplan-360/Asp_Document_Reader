@@ -1,0 +1,49 @@
+﻿
+
+.img-teste {
+    width: 50%;
+    height:auto;
+}
+
+.btn {
+    padding-left: 2.5rem; 
+    padding-right: 2.5rem;
+    border-radius: 15px;
+    color: white;
+}
+
+
+.navbar3 {
+    font-size: 40px;
+    font-weight: 500;
+}
+
+small {
+    color: white
+}
+
+.faixa {
+    background-color: #00b1e9;
+    height: 2%;
+    display:contents;
+}
+
+.footerx {
+    background-color: #011b2b;
+      
+}
+
+.logo {
+    width: 10%;
+    height: auto;
+}
+
+h2 {
+    color: white;
+    margin-right:5px;
+    margin-top: 10px;
+    font-size: 25px;
+    margin-left:-15px;
+}
+
+

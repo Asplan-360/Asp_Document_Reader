@@ -1,0 +1,40 @@
+﻿
+
+
+/* background: url("/wwwroot/bgt.jpg");*/
+
+.img-teste {
+    width: 50%;
+    height:auto;
+}
+
+.box {
+    width: 100%;
+    object-fit: cover;
+    padding: 50px
+}
+
+.navbar3 {
+    background-color: #fff;
+    height: 8%;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.faixa {
+    background-color: #00b1e9;
+    height: 1%;
+}
+
+.footerx {
+    background-color: #011b2b;
+    width: 100%;
+    height: 5%;
+}
+
+.logo {
+    width: 10%;
+    height: auto;
+}
+
+

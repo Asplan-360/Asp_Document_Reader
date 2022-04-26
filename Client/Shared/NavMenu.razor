@@ -15,8 +15,6 @@
         <ul class="navbar-nav mr-auto">
 
 
-
-
            @foreach (var item in MenuItems.GroupBy(x => x.DescMenu))
             {
                 <li class="nav-item dropdown">
@@ -24,13 +22,15 @@
                     <a class="nav-link dropdown-toggle" href="#" id=@item.First().Titulo role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         @item.First().DescMenu
                     </a>
+                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     @foreach (var subitem in item.Where(x => x.MenuId == item.First().MenuId))
                     {
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item " href="#">@subitem.Titulo</a>
+                       
+                            <a class="dropdown-item " href="@subitem.Titulo">@subitem.Titulo</a>
 
-                        </div>
+                       
                     }
+                     </div>
                 </li>
             }
 
