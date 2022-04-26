@@ -46,4 +46,134 @@ h2 {
     margin-left:-15px;
 }
 
+.text-sistemas {
+    font-size:30px;
+    margin-top:12px;
+    
+}
 
+section {
+    padding-bottom: 90px;
+}
+
+
+
+/* Media Query for Mobile Devices */
+@media (max-width: 480px) {
+    .logo {
+        display: none;
+    }
+
+    .btn-fale{
+       
+        margin-left: 66px;      
+    }
+
+    .text-ligue {
+        margin-left: 40px;
+    }
+    .mx-5 {
+        margin-left: 4rem !important;
+    }
+
+    .img-teste {
+        margin-left: 80px;
+        margin-top: 15px;
+    }
+
+    .text-agilidade {
+        font-size: 20px;
+        margin-left: 30px;
+        margin-top: 15px;
+        word-break: normal;
+    }
+
+    .footerx {
+        max-height: 45px;
+        margin-top: 15px;
+        box-sizing: content-box;
+    }
+
+
+
+
+
+
+
+}
+
+/* Media Query for low resolution  Tablets, Ipads */
+@media (min-width: 481px) and (max-width: 767px) {
+   
+}
+
+/* Media Query for Tablets Ipads portrait mode */
+@media (min-width: 768px) and (max-width: 1024px) {
+   
+}
+
+/* Media Query for Laptops and Desktops */
+@media (min-width: 1025px) and (max-width: 1280px) {
+   
+}
+
+/* Media Query for Large screens */
+@media (min-width: 1281px) {
+
+    .img-teste {
+        width: 50%;
+        height: auto;
+    }
+
+    .btn {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+        border-radius: 15px;
+        color: white;
+    }
+
+
+    .navbar3 {
+        font-size: 40px;
+        font-weight: 500;
+    }
+
+    small {
+        color: white
+    }
+
+    .faixa {
+        background-color: #00b1e9;
+        height: 2%;
+        display: contents;
+    }
+
+    .footerx {
+        background-color: #011b2b;
+    }
+
+    .logo {
+        width: 10%;
+        height: auto;
+    }
+
+    h2 {
+        color: white;
+        margin-right: 5px;
+        margin-top: 10px;
+        font-size: 25px;
+        margin-left: -15px;
+    }
+
+    .text-sistemas {
+        font-size: 30px;
+        margin-top: 12px;
+    }
+
+    section {
+        padding-bottom: 24px;        
+
+    }
+
+
+}
