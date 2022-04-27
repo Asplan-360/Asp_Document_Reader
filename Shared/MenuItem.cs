@@ -4,17 +4,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Asp_Document_Reader.Shared;
 
+
 [Table("viewGer_Menu")]
 public class MenuItem
 {
     [Key]
     [Column("GER_Rotina_Id")]
     [Display(Name = "Rotina ID")]
-    public int? RotinaId { get; set; }
+    public int RotinaId { get; set; }
 
     [Column("GER_Menu_ID")]
     [Display(Name = "Menu ID")]
-    public int? MenuId { get; set; }
+    public int MenuId { get; set; }
 
     [Column("DescMenu")]
     [Display(Name = "Tipo")]

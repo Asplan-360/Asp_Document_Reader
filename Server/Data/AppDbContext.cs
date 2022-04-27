@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace Asp_Document_Reader.Server.Data;
 
-public class AppDbContext : DbContext
+public class AppDbContext : IdentityDbContext
 {
 
 
@@ -11,12 +12,13 @@ public class AppDbContext : DbContext
 
     }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
+  
+    //protected override void OnModelCreating(ModelBuilder modelBuilder)
+    //{
 
-        modelBuilder.Entity<MenuItem>();
+    //    modelBuilder.Entity<MenuItem>().HasNoKey();
     
-    }
+    //}
 
 
     public DbSet<MenuItem> MenuItems { get; set; }
