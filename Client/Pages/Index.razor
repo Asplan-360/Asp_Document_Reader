@@ -1,6 +1,11 @@
 ﻿@page "/"
+@using System.Text.Json
 
 @layout LoginLayout
+
+@inject HttpClient http
+@inject NavigationManager navigation
+@inject TokenAuthenticationProvider authStateprovider
 
 <PageTitle>Login</PageTitle>
 
@@ -36,31 +41,56 @@
                         <img src="/logo.png" class="img-teste " alt="Logo Asplan Image">
                         <h2 class="text-agilidade">Agilidade e controle para sua empresa</h2>
                     </div>
+
                     <div class="col-md-8 col-lg-6 col-xl-3 align-content-center mb-3">
-                        <form action="http://google.com.br" method="post">
+
+                        <Aviso Exibir="loginFalhou">
+
+                            <h5>@Mensagem</h5>
+
+                        </Aviso>
+
+                        <EditForm model="userinfo" OnValidSubmit="FazerLogin">
+                            <DataAnnotationsValidator />
                             <div class="divider d-flex  my-4" style="color:white;">
                             </div>
                             <div class="divider my-4" style="color:white;">
                                 <h3 class="text-start fw-bold mr-2 mb-2 fs-2 mb-0">Portal 360</h3>
                                 <h3 class="text-start fw-bold mr-2 fs-2 mb-0">Seja bem-vido</h3>
                             </div>
+
+
+
                             <!-- Email input -->
                             <div class="form-outline mb-3 " style="color:white;width:85%;">
                                 <label class="form-label " for="usuario">Usuário</label>
-                                <input type="email" id="usuario" class="form-control form-control-lg" autocomplete="on" placeholder="" />
+                                <InputText @bind-Value="userinfo.Email" type="email" id="usuario" class="form-control form-control-lg" autocomplete="on" placeholder="" />
+                                <ValidationMessage For="@(() => userinfo.Email)" />
                             </div>
+
+
+
+
                             <!-- Password input -->
                             <div class="form-outline mb-3 " style="color:white;width:85%;">
                                 <label class="form-label " for="password">Senha</label>
-                                <input type="password" id="password" class="form-control form-control-lg" autocomplete="on" placeholder="" />
+                                <InputText @bind-Value="userinfo.Password" type="password" id="password" class="form-control form-control-lg" autocomplete="on" placeholder="" />
+                                <ValidationMessage For="@(() => userinfo.Password)" />
                             </div>
-                            @* <div class="d-flex justify-content-between align-items-center">
-                            <a href="#!" class="text-body">Forgot password?</a>
-                            </div>*@
+
+
+
+
+
+                            <!-- Button Submit -->
+
                             <div class=" text-start mt-4 pt-2">
-                                <button  type="submit" value="Submit" class="btn btn-primary btn-lg active"  aria-pressed="true">Entrar</button>
+                                <button type="submit" value="Submit" class="btn btn-primary btn-lg active" aria-pressed="true">Entrar</button>
                             </div>
-                        </form>
+                        </EditForm>
+
+
+
                     </div>
                 </div>
 
@@ -69,6 +99,8 @@
         </div>
 
     </section>
+
+
 
     <div class=" footer footerx fixed-bottom pb-2 pt-3 ">
         <div class="row">
@@ -89,4 +121,47 @@
 
 </body>
 
+
+@code {
+    private UserInfo userinfo = new UserInfo();
+    bool loginFalhou = false;
+
+    [Parameter]
+    public string Mensagem { get; set; }
+
+    async Task FazerLogin()
+    {
+        try
+        {
+            //var result = await http.PostJsonAsync<UserToken>("login/login", userinfo);
+
+            var loginAsJson = JsonSerializer.Serialize(userinfo);
+
+            var httpResponse = await http.PostAsync("login/login",
+                     new StringContent(loginAsJson, Encoding.UTF8, "application/json"));
+
+            if (httpResponse.IsSuccessStatusCode)
+            {
+                var responseAsString = await httpResponse.Content.ReadAsStringAsync();
+
+                var loginResult = JsonSerializer.Deserialize<UserToken>(responseAsString,
+                     new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                await authStateprovider.Login(loginResult.Token);
+                navigation.NavigateTo("/home");
+            }
+            else
+            {
+                loginFalhou = true;
+                Mensagem = $"Não foi possível realizar o Login do usuário.(Erro: {httpResponse.StatusCode})";
+            }
+        }
+        catch (Exception)
+        {
+            loginFalhou = true;
+            Mensagem = "Não foi possível realizar o Login do Usuário...";
+        }
+    }
+
+}
 

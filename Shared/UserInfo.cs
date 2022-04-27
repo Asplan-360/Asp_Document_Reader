@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Asp_Document_Reader.Shared
+namespace Asp_Document_Reader.Shared;
+
+public class UserInfo
 {
-    public class UserInfo
-    {
-        [Required]
-        [EmailAddress]
-        public string Email { get; set; } = string.Empty;
+    [Required(ErrorMessage = "Informe um email")]
+    [EmailAddress(ErrorMessage = "Formato do email inválido")]
+    public string Email { get; set; } = string.Empty;
 
-        [Required]
-        public string Password  { get; set; } = string.Empty;
+    [Required(ErrorMessage = "Informe a senha")]
+    public string Password { get; set; } = string.Empty;
 
-    }
 }
