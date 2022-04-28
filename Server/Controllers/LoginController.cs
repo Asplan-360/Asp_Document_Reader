@@ -16,10 +16,7 @@ public class LoginController : ControllerBase
     private readonly SignInManager<IdentityUser> _signInManager;
     private readonly IConfiguration _configuration;
 
-    public LoginController()
-    {
-
-    }
+ 
 
     public LoginController(
         UserManager<IdentityUser> userManager,

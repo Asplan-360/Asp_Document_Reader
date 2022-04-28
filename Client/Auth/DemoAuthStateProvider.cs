@@ -20,7 +20,7 @@ public class DemoAuthStateProvider : AuthenticationStateProvider
         var usuario = new ClaimsIdentity(new List<Claim>() { 
           new Claim("Chave", "Valor"),
           new Claim(ClaimTypes.Name, "Thiago Gramuglia"),
-          new Claim(ClaimTypes.Role, "Admin")
+         // new Claim(ClaimTypes.Role, "Admin")
         });
 
         return await Task.FromResult(new AuthenticationState(
