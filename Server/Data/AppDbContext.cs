@@ -28,24 +28,24 @@ public class AppDbContext : IdentityDbContext
     {
         base.OnModelCreating(builder);
 
-        //Cria os perfis de usuário (User e Admin)
+       // Cria os perfis de usuário (User e Admin)
 
-        //builder.Entity<IdentityRole>().HasData(new IdentityRole
-        //{
-        //    Name = "User",
-        //    NormalizedName = "USER",
-        //    Id = Guid.NewGuid().ToString(),
-        //    ConcurrencyStamp = Guid.NewGuid().ToString()
-        //});
+        builder.Entity<IdentityRole>().HasData(new IdentityRole
+        {
+            Name = "User",
+            NormalizedName = "USER",
+            Id = Guid.NewGuid().ToString(),
+            ConcurrencyStamp = Guid.NewGuid().ToString()
+        });
 
 
-        //builder.Entity<IdentityRole>().HasData(new IdentityRole
-        //{
-        //    Name = "Admin",
-        //    NormalizedName = "ADMIN",
-        //    Id = Guid.NewGuid().ToString(),
-        //    ConcurrencyStamp = Guid.NewGuid().ToString()
-        //});
+        builder.Entity<IdentityRole>().HasData(new IdentityRole
+        {
+            Name = "Admin",
+            NormalizedName = "ADMIN",
+            Id = Guid.NewGuid().ToString(),
+            ConcurrencyStamp = Guid.NewGuid().ToString()
+        });
     }
 
 

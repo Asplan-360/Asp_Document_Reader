@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Asp_Document_Reader.Server.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220428132135_Initialschema")]
+    [Migration("20220428174854_Initialschema")]
     partial class Initialschema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -111,6 +111,22 @@ namespace Asp_Document_Reader.Server.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1b41d1c9-d288-413b-951d-c47ed5279e0c",
+                            ConcurrencyStamp = "0b16763b-9521-40ac-b784-f142035dae10",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = "644a2358-f06f-4478-81b2-41dfac072399",
+                            ConcurrencyStamp = "b3d4bd9b-208f-4d5f-bc13-3acc7ce90113",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
