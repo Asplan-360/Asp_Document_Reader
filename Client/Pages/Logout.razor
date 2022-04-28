@@ -1,0 +1,45 @@
+﻿@page "/logout"
+
+
+@inject NavigationManager navigation
+@inject TokenAuthenticationProvider authStateprovider
+
+<h4>Logout</h4>
+
+<Aviso Exibir="Exibir">
+
+    <h5>@Mensagem</h5>
+
+</Aviso>
+
+
+
+
+
+
+@code {
+
+    private bool Exibir = false;
+
+    [Parameter]
+    public string Mensagem { get; set; }
+
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        try
+        {
+            await authStateprovider.Logout();
+            navigation.NavigateTo("/");
+        }
+        catch (Exception ex)
+        {
+            Exibir = true;
+            Mensagem = $"Não foi possível realizar o Logout....{ex.Message}";
+        }
+    }
+
+
+
+}

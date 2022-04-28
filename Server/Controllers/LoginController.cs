@@ -52,7 +52,16 @@ public class LoginController : ControllerBase
 
         if (result.Succeeded)
         {
-            return GenerateToken(model);
+            //incluir o  novo usuário ao perfil user
+            await _userManager.AddToRoleAsync(user, "User");
+
+            //incluir um novo usuário com email que começa com admin no perfil Admin
+            if (user.Email.StartsWith("admin"))
+            {
+                await _userManager.AddToRoleAsync(user, "Admin");
+            }
+
+            return await GenerateToken(model);
         }
         else
         {
@@ -70,7 +79,7 @@ public class LoginController : ControllerBase
 
         if (result.Succeeded)
         {
-            return GenerateToken(userInfo);
+            return await GenerateToken(userInfo);
         }
         else
         {
@@ -79,15 +88,27 @@ public class LoginController : ControllerBase
 
     }
 
-    private UserToken GenerateToken(UserInfo userInfo)
+    private async Task<UserToken> GenerateToken(UserInfo userInfo)
     {
-        var claims = new List<Claim>()
+        //var claims = new List<Claim>()
+        //{
+        //    new Claim(JwtRegisteredClaimNames.UniqueName, userInfo.Email),
+        //    new Claim(ClaimTypes.Name, userInfo.Email),
+        //    new Claim("Thiago", "thiago.gramuglia@asplan.com.br"),
+        //    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+        //};
+
+        var user = await _signInManager.UserManager.FindByEmailAsync(userInfo.Email);
+        var roles = await _signInManager.UserManager.GetRolesAsync(user);
+        var claims = new List<Claim>();
+        claims.Add(new Claim(ClaimTypes.Name, userInfo.Email));
+
+        foreach (var role in roles)
         {
-            new Claim(JwtRegisteredClaimNames.UniqueName, userInfo.Email),
-            new Claim(ClaimTypes.Name, userInfo.Email),
-            new Claim("Thiago", "thiago.gramuglia@asplan.com.br"),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-        };
+            claims.Add(new Claim(ClaimTypes.Role, role));
+        }
+
+
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:key"]));
         var creds = 

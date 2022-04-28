@@ -86,15 +86,33 @@ public class TokenAuthenticationProvider : AuthenticationStateProvider, IAuthori
 
     public async Task Login(string token)
     {
-        await _js.SetInLocalStorage(tokenkey, token);
-        var authState = CreateAuthenticationState(token);
-        NotifyAuthenticationStateChanged(Task.FromResult(authState));
-;        }
+        try
+        {
+            await _js.SetInLocalStorage(tokenkey, token);
+            var authState = CreateAuthenticationState(token);
+            NotifyAuthenticationStateChanged(Task.FromResult(authState));
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+
+    }
 
     public async Task Logout()
     {
-        await _js.RemoveItem(tokenkey);
-        _http.DefaultRequestHeaders.Authorization = null;
-        NotifyAuthenticationStateChanged(Task.FromResult(notAuthenticate));
+
+
+        try
+        {
+            await _js.RemoveItem(tokenkey);
+            _http.DefaultRequestHeaders.Authorization = null;
+            NotifyAuthenticationStateChanged(Task.FromResult(notAuthenticate));
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
     }
 }
