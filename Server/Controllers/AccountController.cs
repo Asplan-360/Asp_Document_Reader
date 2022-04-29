@@ -10,7 +10,7 @@ namespace Asp_Document_Reader.Server.Controllers;
 
 [Route("[controller]")]
 [ApiController]
-public class LoginController : ControllerBase
+public class AccountController : ControllerBase
 {
     private readonly UserManager<IdentityUser> _userManager;
     private readonly SignInManager<IdentityUser> _signInManager;
@@ -18,7 +18,7 @@ public class LoginController : ControllerBase
 
  
 
-    public LoginController(
+    public AccountController(
         UserManager<IdentityUser> userManager,
         SignInManager<IdentityUser> signInManager,
         IConfiguration configuration)
