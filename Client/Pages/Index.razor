@@ -134,11 +134,11 @@
     {
         try
         {
-            //var result = await http.PostJsonAsync<UserToken>("login/login", userinfo);
+            //var result = await http.PostJsonAsync<UserToken>("account/login", userinfo);
 
             var loginAsJson = JsonSerializer.Serialize(userinfo);
 
-            var httpResponse = await http.PostAsync("login/login",
+            var httpResponse = await http.PostAsync("account/login",
                      new StringContent(loginAsJson, Encoding.UTF8, "application/json"));
 
             if (httpResponse.IsSuccessStatusCode)
