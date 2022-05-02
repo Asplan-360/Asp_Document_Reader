@@ -21,7 +21,7 @@ namespace Asp_Document_Reader.Server.Controllers
         {
             _context = context;
         }
-
+        
         // GET: api/MenuItems
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MenuItem>>> GetMenuItems()

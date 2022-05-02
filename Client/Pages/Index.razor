@@ -3,6 +3,9 @@
 @layout LoginLayout
 
 @using System.Text.Json
+@using System.Net
+@using Newtonsoft.Json
+
 
 @inject HttpClient http
 @inject NavigationManager navigation
@@ -130,38 +133,39 @@
     [Parameter]
     public string Mensagem { get; set; }
 
-    async Task FazerLogin()
+    public class ResponseLogin
+    {
+
+    }
+
+    public async Task<ResponseLogin> FazerLogin()
     {
         try
         {
-            //var result = await http.PostJsonAsync<UserToken>("account/login", userinfo);
+            var response = await http.PostAsJsonAsync<UserInfo>("api/Login", userinfo);
 
-            var loginAsJson = JsonSerializer.Serialize(userinfo);
+            var status = response.StatusCode;
 
-            var httpResponse = await http.PostAsync("account/login",
-                     new StringContent(loginAsJson, Encoding.UTF8, "application/json"));
+            var retorno = await response.Content.ReadAsStringAsync();
 
-            if (httpResponse.IsSuccessStatusCode)
-            {
-                var responseAsString = await httpResponse.Content.ReadAsStringAsync();
+            UserResponse usuarioLogado = JsonConvert.DeserializeObject<UserResponse>(retorno);
 
-                var loginResult = JsonSerializer.Deserialize<UserToken>(responseAsString,
-                     new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            //Salvar ele no LocalStorage 
 
-                await authStateprovider.Login(loginResult.Token);
-                navigation.NavigateTo("/home");
-            }
+            if (retorno == null)
+                throw new Exception("");
             else
             {
-                loginFalhou = true;
-                Mensagem = $"Não foi possível realizar o Login do usuário.(Erro: {httpResponse.StatusCode})";
+                navigation.NavigateTo("/Home");   
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
             loginFalhou = true;
             Mensagem = "Não foi possível realizar o Login do Usuário...";
+
         }
+    return null;
     }
 
 }
