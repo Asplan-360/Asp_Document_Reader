@@ -1,5 +1,6 @@
 global using Asp_Document_Reader.Client;
 using Asp_Document_Reader.Client.Auth;
+using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -15,6 +16,7 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 builder.Services.AddAuthorizationCore();
 
 builder.Services.AddScoped<TokenAuthenticationProvider>();
+builder.Services.AddBlazoredLocalStorage();
 
 
 builder.Services.AddScoped<IAuthorizeService, TokenAuthenticationProvider>(

@@ -10,6 +10,7 @@
 @inject HttpClient http
 @inject NavigationManager navigation
 @inject TokenAuthenticationProvider authStateprovider
+@inject Blazored.LocalStorage.ILocalStorageService localstore
 
 <PageTitle>Login</PageTitle>
 
@@ -151,6 +152,10 @@
             UserResponse usuarioLogado = JsonConvert.DeserializeObject<UserResponse>(retorno);
 
             //Salvar ele no LocalStorage 
+
+            await localstore.SetItemAsync("email", @userinfo.Email);
+
+
 
             if (retorno == null)
                 throw new Exception("");

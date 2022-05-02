@@ -2,6 +2,6 @@
 
 public interface IAuthorizeService
 {
-    Task Login(string token);
+    Task Login(string email);
     Task Logout();
 }
