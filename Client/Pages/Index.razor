@@ -12,6 +12,7 @@
 @inject TokenAuthenticationProvider authStateprovider
 @inject Blazored.LocalStorage.ILocalStorageService localstore
 
+
 <PageTitle>Login</PageTitle>
 
 
@@ -129,7 +130,15 @@
 
 @code {
     private UserInfo userinfo = new UserInfo();
+    private Login login = new();
+    private readonly IJSRuntime _js;
+
     bool loginFalhou = false;
+
+    public Index(IJSRuntime js)
+    {
+        _js = js;
+    }
 
     [Parameter]
     public string Mensagem { get; set; }
@@ -151,17 +160,40 @@
 
             UserResponse usuarioLogado = JsonConvert.DeserializeObject<UserResponse>(retorno);
 
-            //Salvar ele no LocalStorage 
+            //Salvar ele no LocalStorage
 
-            await localstore.SetItemAsync("email", @userinfo.Email);
+            await localstore.SetItemAsync("email", @login.email);
 
+            if (usuarioLogado == null)
+            {
+
+                await authStateprovider.Logout();
+                navigation.NavigateTo("/");
+            }
+            else
+            {
+                var chave = await localstore.GetItemAsync<string>("email");
+               
+                if (chave.Contains("admin")) 
+                {
+                    return null;
+
+
+                    
+                }
+                else
+                {
+                    
+                }
+
+            }
 
 
             if (retorno == null)
                 throw new Exception("");
             else
             {
-                navigation.NavigateTo("/Home");   
+                navigation.NavigateTo("/Home");
             }
         }
         catch (Exception ex)
@@ -170,7 +202,7 @@
             Mensagem = "Não foi possível realizar o Login do Usuário...";
 
         }
-    return null;
+        return null;
     }
 
 }
